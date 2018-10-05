@@ -33,24 +33,50 @@ export default class Posts extends Component{
     };
   }
 
-  componentDidMount() {
+  componentWillMount(){
 
+    // Initialize cloud firestore through Firebase
+    const db = firebase.firestore();
+
+    // postsコレクションからデータを取得
+    db.collection("posts").get().then((querySnapshot) => {
+      const posts = [];
+
+      // forEachでドキュメントの配列が取れる
+      querySnapshot.forEach((doc) => {
+        
+        // data()でドキュメントが取れる
+        const document = doc.data();
+          posts.push({
+            name: document.bijoname,
+            image: document.bijoimage,
+          });
+          
+          this.setState({
+            items: posts
+          });
+        })
+      })
+    }
+  
+
+  // componentDidMount() {  
   // Realtime Databseから値を持ってくるときのやり方
-    // const itemsRef = firebase.database().ref('users');
-    // itemsRef.on('value', (snapshot) => {
-    //   let items = snapshot.val();
-    //   let newState = [];
-    //   for (let item in items) {
-    //     newState.push({
-    //       name: items[item].bijoname,
-    //       image: items[item].bijoimage
-    //     });
-    //   }
-    //   this.setState({
-    //     items: newState
-    //   });
-    // });
-  }
+  //   const itemsRef = firebase.database().ref('users');
+  //   itemsRef.on('value', (snapshot) => {
+  //     let items = snapshot.val();
+  //     let newState = [];
+  //     for (let item in items) {
+  //       newState.push({
+  //         name: items[item].bijoname,
+  //         image: items[item].bijoimage
+  //       });
+  //     }
+  //     this.setState({
+  //       items: newState
+  //     });
+  //   });
+  // }
 
   setModalVisible(visible, imageKey){
     this.setState({ modalImage: this.state.image[imageKey] });
@@ -62,8 +88,9 @@ export default class Posts extends Component{
   }
 
   render(){
+
     const images = this.state.items.map((val, key) => {
-      console.log(val.image)
+    //   console.log(val.image)
       return <TouchableWithoutFeedback key={key} 
                 onPress={() => { this.setModalVisible(true, key)}}>
                 <View style={styles.imagewrap}>
@@ -71,7 +98,8 @@ export default class Posts extends Component{
                   <Text style={styles.bijyoName}>{val.name}</Text>
                 </View>
               </TouchableWithoutFeedback>
-    });
+      }
+    );
 
     return(
       <Container>
