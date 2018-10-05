@@ -101,6 +101,7 @@ export default class Top extends Component {
       db.collection('posts').add({
         bijoname: this.state.name,
         bijoimage: this.state.image,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
       });
         Alert.alert("美女を追加しました")
     }

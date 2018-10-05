@@ -39,7 +39,8 @@ export default class Posts extends Component{
     const db = firebase.firestore();
 
     // postsコレクションからデータを取得
-    db.collection("posts").get().then((querySnapshot) => {
+    db.collection("posts").orderBy("timestamp", "desc").get().then((querySnapshot) => {
+      
       const posts = [];
 
       // forEachでドキュメントの配列が取れる
