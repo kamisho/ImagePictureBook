@@ -25,6 +25,7 @@ import {
 import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
 import { ImagePicker, Permissions } from 'expo';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 export default class Top extends Component {
   constructor(props){
@@ -77,7 +78,7 @@ export default class Top extends Component {
 
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      aspect: [16, 9]
+      aspect: [30, 9]
     });
 
     if (!result.cancelled) {
@@ -123,9 +124,9 @@ export default class Top extends Component {
             </Item>
           </Body>
           
-          <CardItem cardBody style={{ marginTop: 20}}>
-           {this.state.image?
-            <Image source={{uri: this.state.image }} style={{ height: 330, width: null, flex: 1}} /> : <Image source={require("../pictures/bijyo.jpg")} style={{ height: 330, width: null, flex: 1}} />
+          <CardItem cardBody style={ styles.cardSize }>
+            {this.state.image ?
+              <Image source={{uri: this.state.image }} style={ styles.imageSize } /> : <Image source={require("../pictures/bijyo.jpg")} style={ styles.imageSize } />
             }
             {console.log(this.props.name)}
           </CardItem>
@@ -162,24 +163,32 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   header: {
-    height: 50,
+    height: hp('10%'),
   },
   inputName: {
-    height: 35,
-    width: 300,
+    height: hp('5%'),
+    width: wp('80%'),
     marginTop: 25,
     backgroundColor: 'white',
   },
   textName: {
     textAlign: 'center',
   },
+  cardSize: {
+    marginTop: 20,
+  },
+  imageSize: {
+    height: hp('45%'),
+    width: null, 
+    flex: 1
+  },
   selectBtn:{
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 20,
+    marginBottom: 15,
   },
   textBtn: {
-    fontSize: 18,
+    fontSize: hp('3%'),
     color: '#4169e1'
-  }
+  },
 });
