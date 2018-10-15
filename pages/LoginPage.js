@@ -15,34 +15,36 @@ export default class Login extends Component{
     }
   }
 
-// Expoでのログイン方法(Firebaseでの認証はできない)
   signIn = async () => {
-    try {
-      const result = await Expo.Google.logInAsync({
-        iosClientId: "684500278423-i1okncu4ifvgiri9lmkjuj0g8td0e1up.apps.googleusercontent.com",
-        scopes: ["profile", "email"]
+      try {
+        const result = await Expo.Google.logInAsync({
+          iosClientId: "684500278423-i1okncu4ifvgiri9lmkjuj0g8td0e1up.apps.googleusercontent.com",
+          scopes: ["profile", "email"]
       });
 
-
       if (result.type === "success") {
-        firebase.auth().onAuthStateChanged(function(user){
-          if (user) {
+        const { idToken, accessToken } = result;
+        const credential = firebase.auth.GoogleAuthProvider.credential(idToken, accessToken);
+        firebase
+          .auth()
+          .signInAndRetrieveDataWithCredential(credential)
+          .then(res => {
             this.setState({
               signedIn: true,
-              name: result.user.name,
-          });
-          }else{
-            console.log("error")
-          }
+              name: result.user.name
+            })
+            Alert.alert("ようこそ、美女の世界へ");
+            this.props.navigation.navigate("Top");
+            console.log(this.state.name);
         })
-        Alert.alert("ようこそ、美女の世界へ");
-        this.props.navigation.navigate("Top");
-        console.log(this.state.name);
+        .catch(error => {
+          console.log("firebase cred err:", error);
+        });
       } else {
-        console.log("cancelled")
+        return { cancelled: true };
       }
-    } catch (e) {
-      console.log("error", e)
+    } catch (err) {
+      console.log("err:", err);
     }
   }
 
