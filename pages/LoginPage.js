@@ -54,7 +54,7 @@ export default class Login extends Component{
         <ImageBackground source={require("../pictures/bijodrink.jpg")} style={{width: '100%', height: '100%'}}>
           <View style={styles.container}>
             <TouchableOpacity onPress={() => this.signIn()} style={styles.loginBtn}>
-              <Text style={styles.signInText}>Sign in with Google</Text>
+              <Image source={require('../pictures/google.png')} style={styles.login} />
             </TouchableOpacity>
             <Text style={styles.explainApp}>いざ、美女の世界へ</Text>
           </View>
@@ -64,14 +64,11 @@ export default class Login extends Component{
 	}
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   explainApp: {
     paddingTop: 20,
@@ -90,16 +87,20 @@ const styles = StyleSheet.create({
     width: null,
   },
   signInText: {
-    color: 'white',
+    color: '#333333',
     fontSize: 20,
     textAlign: 'center'
   },
   loginBtn: {
     flex: 1,
-    backgroundColor: '#DD4B39',
+    backgroundColor: '#F5FCFF',
     position: 'absolute',
     borderRadius: 2,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+  login: {
+    height: 45,
+    width: 250
   }
 });
