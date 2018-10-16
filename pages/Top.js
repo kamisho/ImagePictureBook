@@ -26,13 +26,14 @@ import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
 import { ImagePicker, Permissions } from 'expo';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import LoginPage from './LoginPage';
 
 export default class Top extends Component {
   constructor(props){
     super(props);
     this.state = {
       name: '',
-      image: '',
+      image: ''
     }
   }
 

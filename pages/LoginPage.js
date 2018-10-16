@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, Alert, TouchableOpacity, ImageBackground  } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Top from './Top';
-// import { androidClientId } from 'superSecretKey';
 import Expo from 'expo';
+import { Constants } from 'expo';
 import firebase from '../firebase';
 
 export default class Login extends Component{
@@ -51,38 +51,55 @@ export default class Login extends Component{
 	render(){
 		return(
 			<View>
-        <Button title="Sign in with Google" onPress={() => this.signIn()} />
-        <Text style={styles.explainApp}>美女画像を追加しよう</Text>
-				<Image source={require("../pictures/login.jpg")} style={styles.loginImage} />
+        <ImageBackground source={require("../pictures/bijodrink.jpg")} style={{width: '100%', height: '100%'}}>
+          <View style={styles.container}>
+            <TouchableOpacity onPress={() => this.signIn()} style={styles.loginBtn}>
+              <Text style={styles.signInText}>Sign in with Google</Text>
+            </TouchableOpacity>
+            <Text style={styles.explainApp}>いざ、美女の世界へ</Text>
+          </View>
+        </ImageBackground>
 			</View>
 		);
 	}
 }
 
+
+
 const styles = StyleSheet.create({
-  explainApp: {
-    color: 'white',
-    fontSize: 30,
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
-  loginImage: {
+  explainApp: {
+    paddingTop: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 25,
+    position: 'absolute',
+    backgroundColor: 'pink',
+    fontFamily: 'HiraMinProN-W3',
+    bottom: 0,
+    width: '100%',
+    textAlign: 'center',
+  },
+  loginImageBackground: {
     height: hp('90%'),
     width: null,
   },
-  container: {
+  signInText: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  loginBtn: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  header: {
-    fontSize: 25
-  },
-  image: {
-    marginTop: 15,
-    width: 150,
-    height: 150,
-    borderColor: "rgba(0,0,0,0.2)",
-    borderWidth: 3,
-    borderRadius: 150
+    backgroundColor: '#DD4B39',
+    position: 'absolute',
+    borderRadius: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
