@@ -11,8 +11,13 @@ const config = {
 }
 
 firebase.initializeApp(config);
+
+// Cloud Firestoreのインスタンスを初期化する
 const db = firebase.firestore();
+
+// settingsを設定することが必須
 db.settings({
+  // タイムスタンプが保存される
   timestampsInSnapshots: true
 });
 
