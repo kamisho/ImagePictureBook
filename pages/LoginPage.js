@@ -33,6 +33,14 @@ export default class Login extends Component{
               signedIn: true,
               name: result.user.name
             })
+
+            const user = firebase.auth().currentUser;
+            const uid = user.uid;
+            const db = firebase.firestore();
+            db.collection('users').doc(uid).set({
+              user: this.state.name,
+            });
+
             Alert.alert("ようこそ、美女の世界へ");
             this.props.navigation.navigate("Top");
             console.log(this.state.name);

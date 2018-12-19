@@ -12,7 +12,7 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <Scene key='root'>
+        <Scene key='root' hideNavBar={true} >
           <Scene key="LoginPage" component={LoginPage} initial={true} />
           <Scene key='Top' component={Top} />
           <Scene key='Posts' component={Posts}  />
