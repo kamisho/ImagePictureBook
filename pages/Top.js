@@ -84,7 +84,21 @@ export default class Top extends Component {
 
     if (!result.cancelled) {
       this.setState({image: result.uri});
+      this.uploadImage(result.uri, "test-image")
+        .then(() => {
+          console.log("success")
+        })
+        .catch(() => {
+          console.log("failed")
+        })
     }
+  }
+
+  uploadImage = async(uri, imageName) => {
+    const response = await fetch(uri)
+    const blob = await response.blob();
+    const ref = firebase.storage().ref().child("images" + imageName);
+    return ref.put(blob);
   }
 
   addImage = () => {
