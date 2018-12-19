@@ -15,6 +15,21 @@ export default class Login extends Component{
     }
   }
 
+  componentWillMount(){
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        this.state = {
+          signedIn: true,
+          name: user.uid
+        }
+        console.log(this.state.name)
+        this.props.navigation.navigate("Top");
+      }else{
+        console.log("error")
+      }
+    })
+  }
+  
   signIn = async () => {
       try {
         const result = await Expo.Google.logInAsync({
