@@ -28,6 +28,8 @@ import { ImagePicker, Permissions } from 'expo';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import LoginPage from './LoginPage';
 
+const result = '';
+
 export default class Top extends Component {
   constructor(props){
     super(props);
@@ -84,13 +86,6 @@ export default class Top extends Component {
 
     if (!result.cancelled) {
       this.setState({image: result.uri});
-      this.uploadImage(result.uri, "test-image")
-        .then(() => {
-          console.log("success")
-        })
-        .catch(() => {
-          console.log("failed")
-        })
     }
   }
 
@@ -108,11 +103,19 @@ export default class Top extends Component {
         '美女だけを追加してください。',
       );
     }else{
+      
+      this.uploadImage(this.state.image)
+        .then(() => {
+          console.log("success")
+        })
+        .catch(() => {
+          console.log("failed")
+        })
+
       const groupDto = {
         name: this.state.name,
         image: this.state.image
       };
-
       const db = firebase.firestore();
       db.collection('posts').add({
         bijoname: this.state.name,
