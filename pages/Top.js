@@ -92,7 +92,7 @@ export default class Top extends Component {
   uploadImage = async(uri, imageName) => {
     const response = await fetch(uri)
     const blob = await response.blob();
-    const ref = firebase.storage().ref().child("images" + imageName);
+    const ref = firebase.storage().ref().child("images/" + imageName);
     return ref.put(blob);
   }
 
@@ -104,7 +104,8 @@ export default class Top extends Component {
       );
     }else{
       
-      this.uploadImage(this.state.image)
+      const random = Math.random();
+      this.uploadImage(this.state.image, random)
         .then(() => {
           console.log("success")
         })
