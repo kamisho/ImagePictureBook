@@ -117,11 +117,15 @@ export default class Top extends Component {
         name: this.state.name,
         image: this.state.image
       };
+
+      const user = firebase.auth().currentUser;
+      const uid = user.uid;
       const db = firebase.firestore();
       db.collection('posts').add({
         bijoname: this.state.name,
         bijoimage: this.state.image,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        userId: uid
       });
         Alert.alert("美女を追加しました")
     }
