@@ -93,7 +93,32 @@ export default class Top extends Component {
     const response = await fetch(uri)
     const blob = await response.blob();
     const ref = firebase.storage().ref().child("images/" + imageName);
-    return ref.put(blob);
+    const user = firebase.auth().currentUser;
+    const uid = user.uid;
+    const db = firebase.firestore();
+    
+    // const user = firebase.auth().currentUser;
+    // const uid = user.uid;
+    // const db = firebase.firestore();
+    //   db.collection('posts').add({
+    //     bijoname: this.state.name,
+    //     bijoimage: uri.downl,
+    //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    //     userId: uid
+    //   });
+
+    ref.put(blob).then(snapshot => {
+      ref.getDownloadURL().then(url => {
+        const storagePlace = url
+        
+        db.collection('posts').add({
+          bijoname: this.state.name,
+          bijoimage: storagePlace,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          userId: uid
+        });
+      })
+    })
   }
 
   addImage = () => {
@@ -118,15 +143,15 @@ export default class Top extends Component {
         image: this.state.image
       };
 
-      const user = firebase.auth().currentUser;
-      const uid = user.uid;
-      const db = firebase.firestore();
-      db.collection('posts').add({
-        bijoname: this.state.name,
-        bijoimage: this.state.image,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        userId: uid
-      });
+      // const user = firebase.auth().currentUser;
+      // const uid = user.uid;
+      // const db = firebase.firestore();
+      // db.collection('posts').add({
+      //   bijoname: this.state.name,
+      //   bijoimage: this.state.image,
+      //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      //   userId: uid
+      // });
         Alert.alert("美女を追加しました")
     }
   }
