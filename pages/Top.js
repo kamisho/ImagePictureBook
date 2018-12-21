@@ -192,16 +192,7 @@ export default class Top extends Component {
           </Button>
         </View>
 
-        <Footer>
-          <FooterTab>
-            <Button vertical>
-              <Icon name="apps" onPress={Actions.Top} />
-            </Button>
-            <Button vertical onPress={Actions.Posts}>
-              <Icon name="camera" />
-            </Button>
-          </FooterTab>
-        </Footer>
+        
       </Container>     
     );
   }

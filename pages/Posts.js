@@ -107,18 +107,7 @@ export default class Posts extends Component{
         {images}
       </View> 
       </ScrollView>
-
-      <Footer>
-          <FooterTab>
-            <Button vertical>
-              <Icon name="apps" onPress={Actions.Top} />
-            </Button>
-            <Button vertical onPress={Actions.Posts}>
-              <Icon name="camera" />
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
+    </Container>
     );
   }
 }

@@ -5,6 +5,7 @@ import Top from './Top';
 import Expo from 'expo';
 import { Constants } from 'expo';
 import firebase from '../firebase';
+import FooterBtn from './FooterBtn'
 
 export default class Login extends Component{
   constructor(props){
@@ -23,7 +24,7 @@ export default class Login extends Component{
           name: user.uid
         }
         console.log(this.state.name)
-        this.props.navigation.navigate("Top");
+        this.props.navigation.navigate("FooterBtn");
       }else{
         console.log("error")
       }
@@ -57,7 +58,7 @@ export default class Login extends Component{
             });
 
             Alert.alert("ようこそ、美女の世界へ");
-            this.props.navigation.navigate("Top");
+            this.props.navigation.navigate("FooterBtn");
             console.log(this.state.name);
         })
         .catch(error => {
