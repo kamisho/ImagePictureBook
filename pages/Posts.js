@@ -17,6 +17,7 @@ import {
 } from 'native-base';
 import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
+import FooterBtn from './FooterBtn';
 
 const database = firebase.database();
 
@@ -60,27 +61,12 @@ export default class Posts extends Component{
       })
     }
   
-
-  // componentDidMount() {  
-  // Realtime Databseから値を持ってくるときのやり方
-  //   const itemsRef = firebase.database().ref('users');
-  //   itemsRef.on('value', (snapshot) => {
-  //     let items = snapshot.val();
-  //     let newState = [];
-  //     for (let item in items) {
-  //       newState.push({
-  //         name: items[item].bijoname,
-  //         image: items[item].bijoimage
-  //       });
-  //     }
-  //     this.setState({
-  //       items: newState
-  //     });
-  //   });
-  // }
-
   setModalVisible(visible, imageKey){
-    this.setState({ modalImage: this.state.image[imageKey] });
+    this.setState({ modalImage: this.state.items[imageKey] });
+    this.setState({ modalVisible: visible });
+  }
+
+  closeModal(visible, imageKey){
     this.setState({ modalVisible: visible });
   }
 
@@ -91,9 +77,8 @@ export default class Posts extends Component{
   render(){
 
     const images = this.state.items.map((val, key) => {
-    //   console.log(val.image)
       return <TouchableWithoutFeedback key={key} 
-                onPress={() => { this.setModalVisible(true, key)}}>
+                onPress={() => { this.setModalVisible(true, key)} }>
                 <View style={styles.imagewrap}>
                   <ImageElement imgsource={{uri: val.image}}></ImageElement>
                   <Text style={styles.bijyoName}>{val.name}</Text>
@@ -112,10 +97,11 @@ export default class Posts extends Component{
 
             <View style={styles.modal}>
               <Text style={styles.text}
-                onPress={() => {this.setModalVisible(false)}}>
+                onPress={() => {this.closeModal(false)}}>
                   Close
               </Text>
-                <ImageElement imgsource={this.state.modalImage}></ImageElement>   
+                { console.log(this.state.modalImage["image"]) }
+                <ImageElement imgsource={{uri: this.state.modalImage["image"]}}></ImageElement>   
             </View>   
           </Modal>
         {images}

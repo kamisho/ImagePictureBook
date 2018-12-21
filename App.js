@@ -13,7 +13,7 @@ export default class App extends Component {
     return (
       <Router>
         <Scene key='root' hideNavBar={true} >
-          <Scene key="footerbtn" component={FooterBtn} />
+          <Scene key="FooterBtn" component={FooterBtn} />
           <Scene key="LoginPage" component={LoginPage} initial={true} />
           <Scene key='Top' component={Top} />
           <Scene key='Posts' component={Posts}  />

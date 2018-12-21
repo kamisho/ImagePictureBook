@@ -9,10 +9,10 @@ import {
 import {
     Actions,
 } from 'react-native-router-flux';
-import Posts from './Posts.js';
-import Top from './Top.js';
+import Posts from './Posts';
+import Top from './Top';
 
-export default class FooterBtn extends Component {
+export default class FooterBtn extends Component  {
   constructor(props){
     super(props);
 
@@ -34,19 +34,21 @@ export default class FooterBtn extends Component {
           );
         }
       })()}
+
       <Footer>
         <FooterTab>
-          <Button
+          <Button 
             vertical
             active={this.state.viewPageNum == 0}
             onPress={() => this.setState({
               viewPageNum: 0,
             })}
           >
-            <Icon active={this.state.viewPageNum == 0} name='home'/>
+            <Icon name="apps" onPress={Actions.Top} />
           </Button>
-          <Button
-            vertical
+            
+          <Button 
+            vertical 
             active={this.state.viewPageNum == 1}
             onPress={() => this.setState({
               viewPageNum: 1,
