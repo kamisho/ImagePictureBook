@@ -12,10 +12,12 @@ export default class Login extends Component{
     super(props);
     this.state = {
       signedIn: false,
-      name: ''
+      name: '',
+      email: '',
     }
   }
 
+  // 自動ログイン
   componentWillMount(){
     firebase.auth().onAuthStateChanged(user => {
       if(user){
@@ -47,19 +49,23 @@ export default class Login extends Component{
           .then(res => {
             this.setState({
               signedIn: true,
-              name: result.user.name
+              name: result.user.name,
+              email: result.user.email
             })
+
+            // console.log(result);
 
             const user = firebase.auth().currentUser;
             const uid = user.uid;
             const db = firebase.firestore();
             db.collection('users').doc(uid).set({
               user: this.state.name,
+              email: this.state.email
             });
 
             Alert.alert("ようこそ、美女の世界へ");
             this.props.navigation.navigate("FooterBtn");
-            console.log(this.state.name);
+            console.log(this.state.name + this.state.email);
         })
         .catch(error => {
           console.log("firebase cred err:", error);
@@ -124,7 +130,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   login: {
-    height: 45,
-    width: 250
+    height: 35,
+    width: 200
   }
 });

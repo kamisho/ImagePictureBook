@@ -12,7 +12,8 @@ export default class ImageElement extends Component{
 const styles = StyleSheet.create({
 	image: {
 		flex: 1,
-		width: null,
+		height: null,
+    width: null, 
 		alignSelf: 'stretch',
 	}
 });

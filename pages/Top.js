@@ -93,9 +93,9 @@ export default class Top extends Component {
   uploadImage = async(uri, imageName) => {
     const response = await fetch(uri)
     const blob = await response.blob();
-    const ref = firebase.storage().ref().child("images/" + imageName);
     const user = firebase.auth().currentUser;
     const uid = user.uid;
+    const ref = firebase.storage().ref().child("images/" + `${uid}/` + imageName);
     const db = firebase.firestore();
     
     // const user = firebase.auth().currentUser;
@@ -128,10 +128,10 @@ export default class Top extends Component {
         '美女の名は？',
         '美女だけを追加してください。',
       );
-    }else{
-      
+    }
+    else{ 
       const random = Math.random();
-      this.uploadImage(this.state.image, random)
+      this.uploadImage(this.state.image, this.state.name + random)
         .then(() => {
           console.log("success")
         })
@@ -160,9 +160,9 @@ export default class Top extends Component {
   render() {
     return (
       <Container style={{backgroundColor: "#ffc0cb"}}>
-        <Header style={styles.header}>
+        <Header>
           <Body>
-            <Title style={styles.headerTitle}>Bijyostagram</Title>
+            <Title style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}} >美女図鑑</Title>
           </Body>
         </Header>
 
@@ -182,13 +182,13 @@ export default class Top extends Component {
         </Content>
 
         <View style={styles.selectBtn}>
-          <Button transparent onPress={() => {this.pickImage() }}>
-            <Text style={styles.textBtn}>美女を選ぶ</Text>
+          <Button style={styles.textBtn} transparent onPress={() => {this.pickImage() }}>
+            <Text style={styles.textBtn} style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を選ぶ</Text>
           </Button>
 
           {/* 投稿画面はデバックはActions.Posts() */}
-          <Button transparent onPress={() => { this.addImage() }} >
-            <Text style={styles.textBtn}>美女を追加する</Text>
+          <Button style={styles.textBtn} transparent onPress={() => { this.addImage() }} >
+            <Text style={styles.textBtn} style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を追加する</Text>
           </Button>
         </View>
 
@@ -199,12 +199,6 @@ export default class Top extends Component {
 }
 
 const styles = StyleSheet.create({
-  headerTitle: {
-    marginBottom: 10,
-  },
-  header: {
-    height: hp('10%'),
-  },
   inputName: {
     height: hp('5%'),
     width: wp('80%'),
@@ -215,10 +209,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   cardSize: {
-    marginTop: 20,
+    marginTop: 35,
   },
   imageSize: {
-    height: hp('45%'),
+    height: hp('52%'),
     width: null, 
     flex: 1
   },
@@ -227,8 +221,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginBottom: 15,
   },
-  textBtn: {
-    fontSize: hp('3%'),
-    color: '#4169e1'
+  textBtn:{
+    marginTop: 15,
   },
 });
