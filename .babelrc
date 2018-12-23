@@ -1,3 +1,4 @@
+// Babelの設定
 {
   "presets": ["babel-preset-expo"],
   "env": {

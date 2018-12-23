@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 import firestore from 'firebase/firestore';
-// import 'firebase/auth'
 
 const config = {
 	apiKey: "AIzaSyBQ8NQogw3ZuXgpONJbw61hxssFOB5ZRGY",
@@ -11,10 +10,14 @@ const config = {
   messagingSenderId: "684500278423"
 }
 
+// firebaseのインスタンスを初期化する
 firebase.initializeApp(config);
 
 // Cloud Firestoreのインスタンスを初期化する
 const db = firebase.firestore();
+
+// Googleプロバイダオブジェクトのインスタンを作成する
+const provider = new firebase.auth.GoogleAuthProvider();
 
 // settingsを設定することが必須
 db.settings({
@@ -30,9 +33,5 @@ firebase.auth().onAuthStateChanged((user) => {
 		console.log("false")
 	}
 });
-
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-firebase.auth().languageCode = 'pt';
 
 export default firebase;
