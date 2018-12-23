@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import { 
-    StyleSheet, 
-    Image,
-    ImagePickerIOS, 
-    View,
-    Platform,
-    Alert
+  StyleSheet, 
+  Image,
+  ImagePickerIOS, 
+  View,
+  Platform,
+  Alert
 } from 'react-native';
 import { 
   Container, 
