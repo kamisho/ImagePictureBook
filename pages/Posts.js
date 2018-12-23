@@ -36,6 +36,9 @@ export default class Posts extends Component{
 
   componentWillMount(){
 
+    const user = firebase.auth().currentUser;
+    const uid = user.uid;
+    
     // Initialize cloud firestore through Firebase
     const db = firebase.firestore();
 
@@ -49,13 +52,17 @@ export default class Posts extends Component{
         
         // data()でドキュメントが取れる
         const document = doc.data();
-          posts.push({
-            name: document.bijoname,
-            image: document.bijoimage,
-          });
-          
+          if(uid === document.userId){
+            posts.push({
+              name: document.bijoname,
+              image: document.bijoimage,
+              user: document.userId
+            });
+          }
+
           this.setState({
-            items: posts
+            items: posts,
+            user: document.userId
           });
         })
       })
@@ -100,7 +107,7 @@ export default class Posts extends Component{
                 onPress={() => {this.closeModal(false)}}>
                   Close
               </Text>
-                { console.log(this.state.modalImage["image"]) }
+                
                 <ImageElement imgsource={{uri: this.state.modalImage["image"]}}></ImageElement>   
             </View>   
           </Modal>

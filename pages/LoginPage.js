@@ -18,20 +18,20 @@ export default class Login extends Component{
   }
 
   // 自動ログイン
-  componentWillMount(){
-    firebase.auth().onAuthStateChanged(user => {
-      if(user){
-        this.state = {
-          signedIn: true,
-          name: user.uid
-        }
-        console.log(this.state.name)
-        this.props.navigation.navigate("FooterBtn");
-      }else{
-        console.log("error")
-      }
-    })
-  }
+  // componentWillMount(){
+  //   firebase.auth().onAuthStateChanged(user => {
+  //     if(user){
+  //       this.state = {
+  //         signedIn: true,
+  //         name: user.uid
+  //       }
+  //       console.log(this.state.name)
+  //       this.props.navigation.navigate("FooterBtn");
+  //     }else{
+  //       console.log("error")
+  //     }
+  //   })
+  // }
   
   signIn = async () => {
       try {
