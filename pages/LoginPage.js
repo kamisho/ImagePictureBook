@@ -29,23 +29,23 @@ export default class Login extends Component{
   }
 
   // 自動ログイン
-  // componentWillMount(){
-  //   // firebase.auth().onAuthStateChanged(user) : 現在ログインしているユーザーを取得できる
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     if(user){
-  //       this.state = {
-  //         signedIn: true,
-  //         name: user.uid
-  //       }
-  //       console.log(this.state.name)
-  //       // Expo標準で入っているreact-navigation
-  //       // 全てのコンポーネントにnavigationというpropsが渡される
-  //       this.props.navigation.navigate("FooterBtn");
-  //     }else{
-  //       console.log("error")
-  //     }
-  //   })
-  // }
+  componentWillMount(){
+    // firebase.auth().onAuthStateChanged(user) : 現在ログインしているユーザーを取得できる
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        this.state = {
+          signedIn: true,
+          name: user.uid
+        }
+        console.log(this.state.name)
+        // Expo標準で入っているreact-navigation
+        // 全てのコンポーネントにnavigationというpropsが渡される
+        this.props.navigation.navigate("FooterBtn");
+      }else{
+        console.log("error")
+      }
+    })
+  }
   
   // async/awaitを用いることで非同期処理を記載できる(thenを使用せずにtry-catch文で)
   signIn = async () => {
