@@ -3,5 +3,6 @@
 ##  使用方法
     npm install
   
-    "android": "exp start --android",
-    "ios": "exp start --ios",
+    exp start --android,
+            or
+    exp start --ios,
