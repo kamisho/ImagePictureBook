@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { 
   StyleSheet, 
   Image,
-  ImagePickerIOS, 
   View,
   Platform,
   Alert
@@ -16,14 +15,9 @@ import {
   Body, 
   Title, 
   CardItem, 
-  Button, 
-  Footer, 
-  FooterTab, 
-  Icon, 
+  Button,
   Text,
 } from 'native-base';
-import { Actions } from "react-native-router-flux";
-import firebase from '../firebase';
 import { 
   ImagePicker, 
   Permissions 
@@ -32,10 +26,8 @@ import {
   widthPercentageToDP as wp, 
   heightPercentageToDP as hp
 } from 'react-native-responsive-screen';
-import LoginPage from './LoginPage';
-import FooterBtn from './FooterBtn';
-
-const result = '';
+import { Actions } from "react-native-router-flux";
+import firebase from '../firebase';
 
 export default class Top extends Component {
   constructor(props){
@@ -46,28 +38,6 @@ export default class Top extends Component {
     }
   }
 
-  pickImage() {
-    ImagePicker.showImagePicker({}, (response) => {
-      console.log('Response = ', response);
-  
-    if (response.didCancel) {
-      console.log('User cancelled image picker');
-    }
-    else if (response.error) {
-      console.log('ImagePicker Error: ', response.error);
-    }
-    else if (response.customButton) {
-      console.log('User tapped custom button: ', response.customButton);
-    }
-    else {
-      let source = response.uri ;
-        this.setState({
-          image: source
-        });
-      }
-    });
-  }
-
   onChangeText(e){
     this.setState({
       name: this.state.name
@@ -75,9 +45,10 @@ export default class Top extends Component {
   }
 
   pickImage = async () => {
-
+    // カメラロールのパーミッション取得
     const permission = await Permissions.getAsync(Permissions.CAMERA_ROLL);
       if (permission.status !== 'granted') {
+        // カメラロールの許可をユーザーに求める
         const newPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         if (newPermission.status === 'granted') {
           console.log("granted")
@@ -86,8 +57,11 @@ export default class Top extends Component {
         console.log("error")
     } 
 
+    // Image Pickerを起動する
     let result = await ImagePicker.launchImageLibraryAsync({
+      // allowsEditing : 画像を選択した後に編集するためのUIを表示するかどうか
       allowsEditing: true,
+      // aspect : 編集時の縦横比・Androidのみ適用し、iPhoneは正方形にする
       aspect: [30, 9]
     });
 
@@ -96,24 +70,34 @@ export default class Top extends Component {
     }
   }
 
+  addImage = () => {
+    if(!this.state.name || !this.state.image){
+      Alert.alert(
+        '美女の名は？',
+        '美女だけを追加してください。',
+      );
+    }else{ 
+      const random = Math.random();
+      this.uploadImage(this.state.image, this.state.name + random)
+        .then(() => {
+          console.log("success")
+        })
+        .catch(() => {
+          console.log("failed")
+        })
+      Alert.alert("美女を追加しました")
+    }
+  }
+
   uploadImage = async(uri, imageName) => {
     const response = await fetch(uri)
     const blob = await response.blob();
+    
     const user = firebase.auth().currentUser;
     const uid = user.uid;
     const ref = firebase.storage().ref().child("images/" + `${uid}/` + imageName);
     const db = firebase.firestore();
     
-    // const user = firebase.auth().currentUser;
-    // const uid = user.uid;
-    // const db = firebase.firestore();
-    //   db.collection('posts').add({
-    //     bijoname: this.state.name,
-    //     bijoimage: uri.downl,
-    //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    //     userId: uid
-    //   });
-
     ref.put(blob).then(snapshot => {
       ref.getDownloadURL().then(url => {
         const storagePlace = url
@@ -128,47 +112,12 @@ export default class Top extends Component {
     })
   }
 
-  addImage = () => {
-    if(!this.state.name || !this.state.image){
-      Alert.alert(
-        '美女の名は？',
-        '美女だけを追加してください。',
-      );
-    }
-    else{ 
-      const random = Math.random();
-      this.uploadImage(this.state.image, this.state.name + random)
-        .then(() => {
-          console.log("success")
-        })
-        .catch(() => {
-          console.log("failed")
-        })
-
-      const groupDto = {
-        name: this.state.name,
-        image: this.state.image
-      };
-
-      // const user = firebase.auth().currentUser;
-      // const uid = user.uid;
-      // const db = firebase.firestore();
-      // db.collection('posts').add({
-      //   bijoname: this.state.name,
-      //   bijoimage: this.state.image,
-      //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      //   userId: uid
-      // });
-        Alert.alert("美女を追加しました")
-    }
-  }
-
   render() {
     return (
       <Container style={{backgroundColor: "#ffc0cb"}}>
         <Header>
           <Body>
-            <Title style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}} >美女図鑑</Title>
+            <Title style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女図鑑</Title>
           </Body>
         </Header>
 
@@ -188,17 +137,15 @@ export default class Top extends Component {
         </Content>
 
         <View style={styles.selectBtn}>
-          <Button style={styles.textBtn} transparent onPress={() => {this.pickImage() }}>
-            <Text style={styles.textBtn} style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を選ぶ</Text>
+          <Button transparent onPress={() => {this.pickImage() }}>
+            <Text style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を選ぶ</Text>
           </Button>
 
           {/* 投稿画面はデバックはActions.Posts() */}
-          <Button style={styles.textBtn} transparent onPress={() => { this.addImage() }} >
-            <Text style={styles.textBtn} style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を追加する</Text>
+          <Button transparent onPress={() => { this.addImage() }} >
+            <Text style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を追加する</Text>
           </Button>
-        </View>
-
-        
+        </View>        
       </Container>     
     );
   }
@@ -208,17 +155,17 @@ const styles = StyleSheet.create({
   inputName: {
     height: hp('5%'),
     width: wp('80%'),
-    marginTop: 25,
+    marginTop: 30,
     backgroundColor: 'white',
   },
   textName: {
     textAlign: 'center',
   },
   cardSize: {
-    marginTop: 35,
+    marginTop: 30,
   },
   imageSize: {
-    height: hp('52%'),
+    height: hp('50%'),
     width: null, 
     flex: 1
   },
@@ -226,8 +173,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 15,
-  },
-  textBtn:{
-    marginTop: 15,
-  },
+  }
 });
