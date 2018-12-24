@@ -27,10 +27,7 @@ import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
 import FooterBtn from './FooterBtn';
 import {
-  AdMobBanner,
-  // AdMobInterstitial,
-  // PublisherBanner,
-  // AdMobRewarded
+  PublisherBanner,
 } from 'expo';
 
 
@@ -128,11 +125,12 @@ export default class Posts extends Component{
           </Modal>
         {images}
       </View> 
-      <AdMobBanner
-        bannerSize="banner"
-        adUnitID="ca-app-pub-8344544670768968~4112102263"
-      />
       </ScrollView>
+      <PublisherBanner
+        bannerSize="fullBanner"
+        adUnitID="ca-app-pub-8344544670768968/3345815500"
+        testDeviceID="EMULATOR" 
+      />
     </Container>
     );
   }

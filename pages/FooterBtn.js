@@ -41,6 +41,7 @@ export default class FooterTabs extends Component {
         <Footer>
           <FooterTab>
             <Button
+              vertical
               active={this.state.viewPageNum == 0}
               onPress={() => this.setState({
                 viewPageNum: 0,
@@ -50,6 +51,7 @@ export default class FooterTabs extends Component {
             </Button>
               
             <Button
+            vertical
               active={this.state.viewPageNum == 1}
               onPress={() => this.setState({
                 viewPageNum: 1,
