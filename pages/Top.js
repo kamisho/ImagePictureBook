@@ -24,8 +24,14 @@ import {
 } from 'native-base';
 import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
-import { ImagePicker, Permissions } from 'expo';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { 
+  ImagePicker, 
+  Permissions 
+} from 'expo';
+import {
+  widthPercentageToDP as wp, 
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 import LoginPage from './LoginPage';
 import FooterBtn from './FooterBtn';
 

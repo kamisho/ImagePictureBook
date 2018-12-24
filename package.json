@@ -3,10 +3,10 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "eject": "expo eject"
+    "start": "exp start",
+    "android": "exp start --android",
+    "ios": "exp start --ios",
+    "eject": "exp eject"
   },
   "dependencies": {
     "expo": "^30.0.1",

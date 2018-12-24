@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Dimensions, Modal, ScrollView  } from 'react-native';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  TouchableWithoutFeedback, 
+  Dimensions, 
+  Modal, 
+  ScrollView  
+} from 'react-native';
 import ImageElement from './ImageElement';
 import { 
   Container, 
@@ -18,6 +26,13 @@ import {
 import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
 import FooterBtn from './FooterBtn';
+import {
+  AdMobBanner,
+  // AdMobInterstitial,
+  // PublisherBanner,
+  // AdMobRewarded
+} from 'expo';
+
 
 const database = firebase.database();
 
@@ -67,7 +82,7 @@ export default class Posts extends Component{
         })
       })
     }
-  
+
   setModalVisible(visible, imageKey){
     this.setState({ modalImage: this.state.items[imageKey] });
     this.setState({ modalVisible: visible });
@@ -113,6 +128,10 @@ export default class Posts extends Component{
           </Modal>
         {images}
       </View> 
+      <AdMobBanner
+        bannerSize="banner"
+        adUnitID="ca-app-pub-8344544670768968~4112102263"
+      />
       </ScrollView>
     </Container>
     );

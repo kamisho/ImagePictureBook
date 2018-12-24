@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { 
+	StyleSheet, 
+	Image 
+} from 'react-native';
 
 export default class ImageElement extends Component{
   render(){
