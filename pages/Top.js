@@ -130,7 +130,7 @@ export default class Top extends Component {
           
           <CardItem cardBody style={ styles.cardSize }>
             {this.state.image ?
-              <Image source={{uri: this.state.image }} style={ styles.imageSize } /> : <Image source={require("../pictures/bijyo.jpg")} style={ styles.imageSize } />
+              <Image source={{uri: this.state.image }} style={ styles.imageSize } /> : <Image source={require("../pictures/bijyo.png")} style={ styles.imageSize } />
             }
             {console.log(this.props.name)}
           </CardItem>

@@ -10,8 +10,8 @@
     "orientation": "portrait",
     "icon": "./pictures/bijostagram.png",
     "splash": {
-      "image": "./pictures/splashScreen.png",
-      "resizeMode": "cover",
+      "image": "./pictures/header.png",
+      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {

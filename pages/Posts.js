@@ -39,7 +39,7 @@ export default class Posts extends Component{
 
     this.state = {
       modalVisible: false,
-      modalImage: require('../pictures/bijyo.jpg'),
+      modalImage: require('../pictures/bijyo.png'),
       name: '',
       image: '',
       items: [],
