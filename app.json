@@ -8,9 +8,9 @@
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./pictures/bijostagram.png",
+    "icon": "./assets/bijostagram.png",
     "splash": {
-      "image": "./pictures/header.png",
+      "image": "./assets/header.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
