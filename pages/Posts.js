@@ -6,7 +6,8 @@ import {
   TouchableWithoutFeedback, 
   Dimensions, 
   Modal, 
-  ScrollView  
+  ScrollView,
+  Alert  
 } from 'react-native';
 import ImageElement from './ImageElement';
 import { 
@@ -30,8 +31,6 @@ import {
   PublisherBanner,
 } from 'expo';
 
-
-const database = firebase.database();
 
 export default class Posts extends Component{
   constructor(props){
@@ -89,10 +88,29 @@ export default class Posts extends Component{
     this.setState({ modalVisible: visible });
   }
 
-  getImage(){
-    return this.state.modalImage;
+  deleteAlert = () => {
+    Alert.alert(
+      "本当に削除しますか？",
+      "あなたの美女が削除されます",
+      [
+        {text: "Yes", onPress: () => this.deleteImage() },
+        {text: "NO",  onPress: () => this.closeModal(false) },
+      ],
+      {cancelable: false}
+    )
   }
 
+  deleteImage = () => {
+    const db = firebase.firestore();
+    const modalImage = this.state.modalImage["image"].replace("/");
+    db.collection("posts").doc(modalImage).delete().then(() => {
+      // modalImage -> 投稿のURLというフィールドが取れてしまう
+      console.log(modalImage)
+    }).catch((error) => {
+      console.log("error")
+    })
+  }
+  
   render(){
 
     const images = this.state.items.map((val, key) => {
@@ -119,8 +137,11 @@ export default class Posts extends Component{
                 onPress={() => {this.closeModal(false)}}>
                   Close
               </Text>
-                
-                <ImageElement imgsource={{uri: this.state.modalImage["image"]}}></ImageElement>   
+              <Text style={styles.text}
+                onPress={() => this.deleteAlert() }>
+                  Delete
+              </Text>  
+                <ImageElement imgsource={{uri: this.state.modalImage["image"]}}></ImageElement> 
             </View>   
           </Modal>
         {images}
