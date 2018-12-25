@@ -145,7 +145,7 @@ export default class Top extends Component {
           <Button transparent onPress={() => { this.addImage() }} >
             <Text style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を追加する</Text>
           </Button>
-        </View>        
+        </View>
       </Container>     
     );
   }

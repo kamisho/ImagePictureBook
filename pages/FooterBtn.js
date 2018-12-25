@@ -11,6 +11,7 @@ import {
 } from 'react-native-router-flux';
 import Top from './Top';
 import Posts from './Posts';
+import Settings from './Settings';
 
 export default class FooterTabs extends Component {
   constructor(props){
@@ -29,9 +30,13 @@ export default class FooterTabs extends Component {
             return(
               <Top />
             );
-          }else{
+          }else if(this.state.viewPageNum == 1){
             return(
               <Posts />
+            );
+          }else{
+            return(
+              <Settings />
             );
           }
         })()}
@@ -51,13 +56,23 @@ export default class FooterTabs extends Component {
             </Button>
               
             <Button
-            vertical
+              vertical
               active={this.state.viewPageNum == 1}
               onPress={() => this.setState({
                 viewPageNum: 1,
               })}
             >
               <Icon active={this.state.viewPageNum == 1} name='star'/>
+            </Button>
+
+            <Button
+              vertical
+              active={this.state.viewPageNum == 2}
+              onPress={() => this.setState({
+                viewPageNum: 2
+              })}
+            >
+              <Icon active={this.state.viewPageNum == 2} name="settings" />
             </Button>
           </FooterTab>
         </Footer>
