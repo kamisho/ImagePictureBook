@@ -117,7 +117,7 @@ export default class Top extends Component {
       <Container style={{backgroundColor: "#ffc0cb"}}>
         <Header>
           <Body>
-            <Title style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女図鑑</Title>
+            <Title style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>Bijostagram</Title>
           </Body>
         </Header>
 
