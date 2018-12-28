@@ -3,5 +3,5 @@
 ##  使用方法
     npm install
   
-    exp start --android
-    exp start --ios
+    expo start --android
+    expo start --ios
