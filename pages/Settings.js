@@ -1,47 +1,82 @@
 import React, { Component } from 'react';
 import {
-  View,
+  Container,
+  Header,
+  Content,
+  List,
+  ListItem,
   Text,
+  Button,
+} from 'native-base';
+import {
+  Alert,
   StyleSheet
 } from 'react-native';
 import firebase from '../firebase';
+import LoginPage from "./LoginPage";
+import EditProfile from './EditProfile';
+import Expo from 'expo';
+import {
+  Actions
+} from 'react-native-router-flux';
 
 export default class Settings extends Component{
   constructor(props){
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      sex: '',
-      year: ''
+      user: ""
     }
   }
 
   componentWillMount(){
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user){
-        this.state = {
-          name: user.name,
-          email: user.email
-        }
-      }else{
-        console.log("error");
-      }
+    const user = firebase.auth().currentUser;
+    const uid = user.uid;
+    this.setState({
+      user: uid
+    })
+  }
+
+  logout = () => {
+    firebase.auth().signOut()
+    .then(() => {
+      Alert.alert("ログアウトしました")
+      // this.props.navigation.navigate("FooterBtn");
+      Actions.LoginPage()
+    })
+    .catch((error) => {
+      console.log(error);
     })
   }
 
   render(){
     return(
-      <View style={styles.design}>
-        <Text>{this.state.name}</Text>
-        <Text>{this.state.email}</Text>
-      </View>
+      <Container>
+        <Header />
+        <Content>
+          <List>
+            <ListItem>
+            <Button onPress={() => Actions.EditProfile()} style={styles.accountEdit}>
+                <Text style={styles.accountLetter}>プロフィール編集</Text>
+              </Button>
+            </ListItem>
+
+            <ListItem>
+              <Button onPress={() => this.logout()} style={styles.accountEdit}>
+                <Text style={styles.accountLetter}>ログアウト</Text>
+              </Button>
+            </ListItem>
+          </List>
+        </Content>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  design: {
-    marginTop: 50
+  accountEdit: {
+    backgroundColor: "transparent"
+  },
+  accountLetter: {
+    color: 'black',
   }
 })

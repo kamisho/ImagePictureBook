@@ -12,6 +12,7 @@ import {
 import Top from './Top';
 import Posts from './Posts';
 import Settings from './Settings';
+import LoginPage from './LoginPage';
 
 export default class FooterTabs extends Component {
   constructor(props){
@@ -34,9 +35,13 @@ export default class FooterTabs extends Component {
             return(
               <Posts />
             );
-          }else{
+          }else if(this.state.viewPageNum == 2){
             return(
               <Settings />
+            );
+          }else{
+            return(
+              <LoginPage />
             );
           }
         })()}
