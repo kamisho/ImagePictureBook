@@ -52,6 +52,7 @@ export default class Login extends Component{
       try {
         // await Expo.Google.logInAsync({}) : Google認証機能の追加・画面修正
         const result = await Expo.Google.logInAsync({
+          androidClientId: "684500278423-ejd7cpte83b8udp6k7rdqjomm47fimls.apps.googleusercontent.com",
           iosClientId: "684500278423-i1okncu4ifvgiri9lmkjuj0g8td0e1up.apps.googleusercontent.com",
           scopes: ["profile", "email"]
       });

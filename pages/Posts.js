@@ -150,7 +150,6 @@ export default class Posts extends Component{
       <PublisherBanner
         bannerSize="fullBanner"
         adUnitID="ca-app-pub-8344544670768968/3345815500"
-        testDeviceID="EMULATOR" 
       />
     </Container>
     );
