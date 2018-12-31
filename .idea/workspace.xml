@@ -7,10 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f58c465-4362-4acf-bc97-6fdd2f374b67" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/FooterBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/FooterBtn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Posts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
