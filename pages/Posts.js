@@ -126,7 +126,7 @@ export default class Posts extends Component{
 
     return(
       <Container>
-      <ScrollView>
+      <ScrollView style={{ marginTop: 20 }}>
         <View style={styles.container}>
           <Modal style={styles.modal} animationType={'fade'}
                  transparent={true} visible={this.state.modalVisible}
@@ -137,10 +137,10 @@ export default class Posts extends Component{
                 onPress={() => {this.closeModal(false)}}>
                   Close
               </Text>
-              <Text style={styles.text}
+              {/* <Text style={styles.text}
                 onPress={() => this.deleteAlert() }>
                   Delete
-              </Text>  
+              </Text>   */}
                 <ImageElement imgsource={{uri: this.state.modalImage["image"]}}></ImageElement> 
             </View>   
           </Modal>

@@ -12,7 +12,7 @@ import {
 import Top from './Top';
 import Posts from './Posts';
 import Settings from './Settings';
-import LoginPage from './LoginPage';
+import LaunchPage from './LaunchPage';
 
 export default class FooterTabs extends Component {
   constructor(props){
@@ -41,7 +41,7 @@ export default class FooterTabs extends Component {
             ); */}
           }else{
             return(
-              <LoginPage />
+              <LaunchPage />
             );
           }
         })()}

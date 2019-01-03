@@ -62,7 +62,7 @@ export default class Top extends Component {
       // allowsEditing : 画像を選択した後に編集するためのUIを表示するかどうか
       allowsEditing: true,
       // aspect : 編集時の縦横比・Androidのみ適用し、iPhoneは正方形にする
-      aspect: [30, 9]
+      aspect: [30, 30]
     });
 
     if (!result.cancelled) {

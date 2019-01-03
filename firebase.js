@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 
 const config = {
-	apiKey: "AIzaSyBQ8NQogw3ZuXgpONJbw61hxssFOB5ZRGY",
+	apiKey: "AIzaSyBRpBvMGOJV6-P0MKy2gg6XoPhguuDH_Iw",
   authDomain: "bijyo-collection.firebaseapp.com",
   databaseURL: "https://bijyo-collection.firebaseio.com",
   projectId: "bijyo-collection",

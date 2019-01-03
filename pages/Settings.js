@@ -13,7 +13,7 @@ import {
   StyleSheet
 } from 'react-native';
 import firebase from '../firebase';
-import LoginPage from "./LoginPage";
+import LoginPage from "./LaunchPage";
 import EditProfile from './EditProfile';
 import Expo from 'expo';
 import {

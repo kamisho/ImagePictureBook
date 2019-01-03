@@ -4,9 +4,11 @@ import {
   Scene
 } from 'react-native-router-flux';
 import FooterBtn from './pages/FooterBtn';
-import LoginPage from './pages/LoginPage';
+import LaunchPage from './pages/LaunchPage';
 import Top from './pages/Top';
 import Posts from './pages/Posts';
+import LoginForm from './pages/LoginForm';
+import SignInForm from './pages/SignInForm';
 // import EditProfile from './pages/EditProfile';
 // import Settings from "./pages/Settings";
 
@@ -17,9 +19,11 @@ export default class App extends Component {
         {/* keyがシーンの識別子になる(別ページでAction.識別子 となる) */}
         <Scene key='root' hideNavBar={true} >
           <Scene key="FooterBtn" component={FooterBtn} />
-          <Scene key="LoginPage" component={LoginPage} initial={true} />
+          <Scene key="LaunchPage" component={LaunchPage} initial={true} />
           <Scene key='Top' component={Top} />
           <Scene key='Posts' component={Posts} />
+          <Scene key="LoginForm" component={LoginForm} hideNavBar={false} />
+          <Scene key="SignInForm" component={SignInForm} hideNavBar={false} />
           {/* <Scene key="Settings" component={Settings} /> */}
           {/* <Scene key="EditProfile" component={EditProfile} hideNavBar={false} /> */}
         </Scene>
