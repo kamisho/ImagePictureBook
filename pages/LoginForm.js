@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import {
+  Container,
+  Body,
+} from 'native-base';
 import { 
   StyleSheet, 
   Text, 
@@ -29,16 +33,16 @@ export default class Login extends Component {
 
   render() {
     return (
+      <Container style={styles.allScreen}>
+        <Body>
+          <Text style={styles.titleText}>美女国への入国審査</Text>
+        </Body>
+
       <View style={styles.container}>
-        <Text>Login</Text>
-        {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
-            {this.state.errorMessage}
-          </Text>}
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
-          placeholder="Email"
+          placeholder="メールアドレス"
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
@@ -46,27 +50,37 @@ export default class Login extends Component {
           secureTextEntry
           style={styles.textInput}
           autoCapitalize="none"
-          placeholder="Password"
+          placeholder="パスワード"
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        <Button title="Login" onPress={this.handleLogin} />
-      </View>
+        <Button title="ログイン" onPress={this.handleLogin} />
+        </View>
+      </Container>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  allScreen: {
+    backgroundColor: "pink"
+  },
+  titleText: {
+    color: "white",
+    fontSize: 30,
+    paddingTop: 50,
+    fontFamily: 'HiraMinProN-W3',
+  },
   container: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 250
   },
   textInput: {
     height: 40,
     width: '90%',
     borderColor: 'gray',
     borderWidth: 1,
-    marginTop: 8
-  }
+    marginTop: 50
+  },
 })

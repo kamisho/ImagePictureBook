@@ -8,6 +8,8 @@ import {
   Alert
 } from 'react-native'
 import {
+  Container,
+  Body,
   DatePicker
 } from 'native-base';
 import firebase from '../firebase'
@@ -25,25 +27,28 @@ export default class SignInForm extends Component {
   }
 
   handleSignUp = () => {
-    const { email, password } = this.state
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      firebase.auth().onAuthStateChanged(user => {
-        if(user){
-          const uid = user.uid;
-          const db = firebase.firestore();
-          db.collection("users").doc(uid).set({
-            email: this.state.email,
-            gender: this.state.gender == 0 ? "男性" : "女性",
-            birthDay: this.state.birthDay
-          });
-        }
-      this.props.navigation.navigate('FooterBtn')
-      Alert.alert("ようこそ、美女の世界へ")
-    })
+    if(this.state.birthDay == "" || this.state.email == "" || this.state.email == ""){
+      Alert.alert("すべての項目を入力してください")
+    }else{
+      const { email, password } = this.state
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        firebase.auth().onAuthStateChanged(user => {
+          if(user){
+            const uid = user.uid;
+            const db = firebase.firestore();
+            db.collection("users").doc(uid).set({
+              email: this.state.email,
+              gender: this.state.gender == 0 ? "男性" : "女性",
+              birthDay: this.state.birthDay
+            });
+          }
+        this.props.navigation.navigate('FooterBtn')
+        Alert.alert("ようこそ、美女の世界へ")
+      })
+    }
   }
-    
 
   render() {
     const genders = [
@@ -52,64 +57,82 @@ export default class SignInForm extends Component {
     ];
 
     return (
-      <View style={styles.container}>
-        <Text>新規会員登録</Text>
-        {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
-            {this.state.errorMessage}
-          </Text>}
-        <TextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={email => this.setState({ email })}
-          value={this.state.email}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="Password"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={password => this.setState({ password })}
-          value={this.state.password}
-        />
+      <Container style={styles.allScreen}>
+        <Body>
+          <Text style={styles.titleText}>新規会員登録</Text>
+        </Body>
 
-        <RadioForm
-          initial={0}
-          radio_props={genders}
-          onPress={(value) => this.setState({ gender: value })}
-          formHorizontal={true}
-        />
-        
-        <DatePicker 
-          defaultDate={new Date(2018,4, 4)}
-          minimumDate={new Date(1901, 1, 1)}
-          maximumDate={new Date(2018, 12, 31)}
-          locale={"ja"}
-          placeHolderText="生年月日"
-          textStyle={{ color: "green"}}
-          modalTransparent={true}
-          placeHolderTextStyle={{ color: "#d3d3d3" }}
-          onDateChange={value => this.setState({ birthDay: value })}
-        />
+        <View style={styles.container}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Email"
+            autoCapitalize="none"
+            style={styles.textInput}
+            onChangeText={email => this.setState({ email })}
+            value={this.state.email}
+          />
+          <TextInput
+            style={styles.textInput}
+            secureTextEntry
+            placeholder="Password"
+            autoCapitalize="none"
+            style={styles.textInput}
+            onChangeText={password => this.setState({ password })}
+            value={this.state.password}
+          />
 
-        <Button title="Sign Up" onPress={this.handleSignUp} />
-      </View>
+          <RadioForm
+            style={styles.selectGender}
+            initial={0}
+            radio_props={genders}
+            onPress={(value) => this.setState({ gender: value })}
+            formHorizontal={true}
+          />
+          
+          <DatePicker
+            defaultDate={new Date(2018,4, 4)}
+            minimumDate={new Date(1901, 1, 1)}
+            maximumDate={new Date(2018, 12, 31)}
+            locale={"ja"}
+            modalTransparent={false}
+            animationType={"fade"}
+            placeHolderText="生年月日"
+            textStyle={{ color: "green"}}
+            placeHolderTextStyle={{ color: "black" }}
+            onDateChange={value => this.setState({ birthDay: value })}
+          />
+          <Button title="登録" onPress={this.handleSignUp} />
+        </View>
+      </Container>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  allScreen: {
+    backgroundColor: "pink"
+  },
+  titleText: {
+    color: "white",
+    fontSize: 30,
+    paddingTop: 50,
+    fontFamily: 'HiraMinProN-W3',
+  },
   container: {
-    flex: 1,
+    flex:1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 200
   },
   textInput: {
     height: 40,
     width: '90%',
     borderColor: 'gray',
     borderWidth: 1,
-    marginTop: 8
+    marginTop: 30
+  },
+  selectGender: {
+    paddingTop:15,
+    justifyContent: "space-around"
   }
 })
