@@ -153,7 +153,7 @@ export default class Posts extends Component{
       </View> 
       </ScrollView>
       <AdMobBanner
-        bannerSize="fullBanner"
+        bannerSize="largeBanner"
         adUnitID={adUnitID}
         testDeviceID="EMULATOR"
       />
