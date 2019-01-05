@@ -22,16 +22,21 @@ import {
   Button, 
   Footer, 
   FooterTab, 
-  Icon, 
+  Icon,
 } from 'native-base';
+import {Platform } from 'react-native'
 import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
 import FooterBtn from './FooterBtn';
 import {
+  AdMobBanner,
+  AdMobInterstitial,
   PublisherBanner,
+  AdMobRewarded
 } from 'expo';
 
 
+const adUnitID = Platform.OS == "android" ? "ca-app-pub-8344544670768968/3309132385" : "ca-app-pub-8344544670768968/3345815500"
 export default class Posts extends Component{
   constructor(props){
     super(props);
@@ -147,9 +152,10 @@ export default class Posts extends Component{
         {images}
       </View> 
       </ScrollView>
-      <PublisherBanner
+      <AdMobBanner
         bannerSize="fullBanner"
-        adUnitID="ca-app-pub-8344544670768968/3345815500"
+        adUnitID={adUnitID}
+        testDeviceID="EMULATOR"
       />
     </Container>
     );
