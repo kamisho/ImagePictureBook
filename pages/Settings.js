@@ -13,7 +13,8 @@ import {
   StyleSheet
 } from 'react-native';
 import firebase from '../firebase';
-import LoginPage from "./LaunchPage";
+import LaunchPage from "./LaunchPage";
+import Tutorial from './Tutorial';
 import EditProfile from './EditProfile';
 import Expo from 'expo';
 import {
@@ -40,8 +41,7 @@ export default class Settings extends Component{
     firebase.auth().signOut()
     .then(() => {
       Alert.alert("ログアウトしました")
-      // this.props.navigation.navigate("FooterBtn");
-      Actions.LoginPage()
+      Actions.LaunchPage();
     })
     .catch((error) => {
       console.log(error);
@@ -56,7 +56,13 @@ export default class Settings extends Component{
           <List>
             <ListItem>
             <Button onPress={() => Actions.EditProfile()} style={styles.accountEdit}>
-                <Text style={styles.accountLetter}>プロフィール編集</Text>
+                <Text style={styles.accountLetter}>プロフィール</Text>
+              </Button>
+            </ListItem>
+
+            <ListItem>
+            <Button onPress={() => Actions.Tutorial()} style={styles.accountEdit}>
+                <Text style={styles.accountLetter}>チュートリアル</Text>
               </Button>
             </ListItem>
 

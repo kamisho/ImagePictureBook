@@ -35,10 +35,10 @@ export default class FooterTabs extends Component {
             return(
               <Posts />
             );
-          {/* }else if(this.state.viewPageNum == 2){
+          }else if(this.state.viewPageNum == 2){
             return(
               <Settings />
-            ); */}
+            );
           }else{
             return(
               <LaunchPage />
@@ -70,7 +70,7 @@ export default class FooterTabs extends Component {
               <Icon active={this.state.viewPageNum == 1} name='star'/>
             </Button>
 
-            {/* <Button
+            <Button
               vertical
               active={this.state.viewPageNum == 2}
               onPress={() => this.setState({
@@ -78,7 +78,7 @@ export default class FooterTabs extends Component {
               })}
             >
               <Icon active={this.state.viewPageNum == 2} name="settings" />
-            </Button> */}
+            </Button>
           </FooterTab>
         </Footer>
       </Container>

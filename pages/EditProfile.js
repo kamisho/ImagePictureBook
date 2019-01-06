@@ -9,22 +9,36 @@ export default class EditProfile extends Component{
   constructor(props){
     super(props);
     this.state = {
-      name: "",
       email: "",
-      sex: "",
+      gender: "",
       birthday: ""
     }
   }
 
   componentWillMount(){
+    const db = firebase.firestore();
     const user = firebase.auth().currentUser;
     const uid = user.uid
-    console.log(user);
-    this.setState({
-      name: user.displayName,
-      email: user.email,
-    })
+    const userRef = db.collection('users').doc(uid);
+    userRef.get().then(doc => {
+      if(doc.exists){
+        
+        const _d = new Date(doc.data().birthDay["seconds"] * 1000);
+        const Y = _d.getFullYear();
+        const m = ("0" + (_d.getMonth() + 1)).slice(-2);
+        const d = ("0" + _d.getDate()).slice(-2);
 
+        this.setState({
+          email: doc.data().email,
+          gender: doc.data().gender,
+          birthday: `${Y}年${m}月${d}日`
+        }).bind(this)
+      }else{
+        console.log("No");
+      }
+    }).catch(error => {
+      console.log(error)
+    })
   }
 
   changeProfile = () => {
@@ -35,13 +49,9 @@ export default class EditProfile extends Component{
     return(
       <View>
         <Text style={{ marginTop: 20 }}>{this.state.name}</Text>
-        <Text>{this.state.email}</Text>
-
-        {/* 性別 - Picker with Icon */}
-
-        {/* 誕生日 - Date Picker */}
-
-        {/* 保存ボタン - ChangeProfile */}
+        <Text>{"メールアドレス: " + this.state.email}</Text>
+        <Text>{"性別 : " + this.state.gender}</Text>
+        <Text>{"生年月日 : " + this.state.birthday}</Text>
       </View>
     );
   }
