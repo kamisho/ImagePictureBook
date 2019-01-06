@@ -8,7 +8,8 @@ import {
   Text, 
   TextInput, 
   View, 
-  Button 
+  Button,
+  Alert
 } from 'react-native'
 import firebase from '../firebase'
 
@@ -28,7 +29,9 @@ export default class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => this.props.navigation.navigate('FooterBtn'))
-      .catch(error => console.log(error))
+      .catch(error => 
+        Alert.alert("ログインに失敗しました")
+      )
   }
 
   render() {

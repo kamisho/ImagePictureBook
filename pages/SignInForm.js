@@ -26,9 +26,28 @@ export default class SignInForm extends Component {
     }
   }
 
+  mailFormatCheck(mailAddress) {
+    var mail_regex1 = new RegExp( '(?:[-!#-\'*+/-9=?A-Z^-~]+\.?(?:\.[-!#-\'*+/-9=?A-Z^-~]+)*|"(?:[!#-\[\]-~]|\\\\[\x09 -~])*")@[-!#-\'*+/-9=?A-Z^-~]+(?:\.[-!#-\'*+/-9=?A-Z^-~]+)*' );
+    var mail_regex2 = new RegExp( '^[^\@]+\@[^\@]+$' );
+    if( mailAddress.match( mail_regex1 ) && mailAddress.match( mail_regex2 ) ) {
+        // 全角チェック
+        if( mailAddress.match( /[^a-zA-Z0-9\!\"\#\$\%\&\'\(\)\=\~\|\-\^\\\@\[\;\:\]\,\.\/\\\<\>\?\_\`\{\+\*\} ]/ ) ) { return false; }
+        // 末尾TLDチェック（〜.co,jpなどの末尾ミスチェック用）
+        if( !mailAddress.match( /\.[a-z]+$/ ) ) { return false; }
+        return true;
+    } else {
+        return false;
+    }
+  }
+
   handleSignUp = () => {
     if(this.state.birthDay == "" || this.state.email == "" || this.state.email == ""){
-      Alert.alert("すべての項目を入力してください")
+      Alert.alert("すべての項目を入力してください");
+    }else if(this.state.password.length < 6){
+      Alert.alert("パスワードは6文字以上必要です");
+    }else if(!this.mailFormatCheck(this.state.email)){ 
+      Alert.alert("正しいメールアドレスの形式を入力してください")
+    // メアドがすでに登録されていた場合ってコードが欲しい
     }else{
       const { email, password } = this.state
       firebase
@@ -45,8 +64,8 @@ export default class SignInForm extends Component {
             });
           }
         this.props.navigation.navigate('FooterBtn')
-        Alert.alert("ようこそ、美女の世界へ")
       })
+      Alert.alert("ようこそ、美女の世界へ")
     }
   }
 
