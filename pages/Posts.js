@@ -7,7 +7,8 @@ import {
   Dimensions, 
   Modal, 
   ScrollView,
-  Alert  
+  Alert,
+  Share
 } from 'react-native';
 import ImageElement from './ImageElement';
 import { 
@@ -34,7 +35,8 @@ import {
   PublisherBanner,
   AdMobRewarded
 } from 'expo';
-
+import axios from 'axios';
+import { Buffer } from 'buffer/';
 
 const adUnitID = Platform.OS == "android" ? "ca-app-pub-8344544670768968/3309132385" : "ca-app-pub-8344544670768968/3345815500"
 export default class Posts extends Component{
@@ -115,6 +117,29 @@ export default class Posts extends Component{
       console.log("error")
     })
   }
+
+  shareSns = () => {
+    // const image = {uri: this.state.modalImage}
+    // Share.share({
+    //   message: "Bijostagramから投稿",
+    //   url: {uri: this.state.modalImage}
+    // })
+
+    const img = this.state.modalImage["image"]
+    
+    axios
+      .get(img, {
+        responseType: 'arraybuffer'
+      })
+      .then(response => {
+        const image = Buffer.from(response.data).toString('base64');
+        Share.share({
+          message: `Bijostagramから投稿`,
+          url: `data:${response.headers['content-type'].toLowerCase()};base64,${image}`,
+        }
+      );
+    })
+  }
   
   render(){
 
@@ -146,8 +171,11 @@ export default class Posts extends Component{
                 onPress={() => this.deleteAlert() }>
                   Delete
               </Text>   */}
-                <ImageElement imgsource={{uri: this.state.modalImage["image"]}}></ImageElement> 
-            </View>   
+                <ImageElement imgsource={{uri: this.state.modalImage["image"]}}></ImageElement>
+                <Button onPress={() => this.shareSns()}>
+                  <Text>シェア</Text>
+                </Button>
+            </View>
           </Modal>
         {images}
       </View> 
