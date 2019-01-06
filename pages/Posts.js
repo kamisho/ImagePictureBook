@@ -134,7 +134,8 @@ export default class Posts extends Component{
       .then(response => {
         const image = Buffer.from(response.data).toString('base64');
         Share.share({
-          message: `Bijostagramから投稿`,
+          title: "#美女図鑑",
+          message: `Bijostagramから投稿\n\niOS : coming soon\n\nAndroid: https://play.google.com/store/apps/details?id=com.kamisho.Bijostagram`,
           url: `data:${response.headers['content-type'].toLowerCase()};base64,${image}`,
         }
       );
@@ -172,8 +173,8 @@ export default class Posts extends Component{
                   Delete
               </Text>   */}
                 <ImageElement imgsource={{uri: this.state.modalImage["image"]}}></ImageElement>
-                <Button onPress={() => this.shareSns()}>
-                  <Text>シェア</Text>
+                <Button style={styles.shareBtn} onPress={() => this.shareSns()}>
+                  <Text style={styles.shareBtnText}>Let's share your 美女</Text>
                 </Button>
             </View>
           </Modal>
@@ -217,5 +218,16 @@ const styles = StyleSheet.create({
   },
   bijyoName: {
     textAlign: 'center',
+  },
+  shareBtn: {
+    backgroundColor: "pink",
+    width: '100%',
+    justifyContent: 'center',
+    textAlign: "center",
+  },
+  shareBtnText: {
+    color: "white",
+    fontSize: 20,
+    fontFamily: 'HiraMinProN-W3',
   }
 });
