@@ -6,7 +6,7 @@ import {
 import { 
   StyleSheet, 
   Text, 
-  TextInput, 
+  TextInput,
   View, 
   Button,
   Alert
@@ -46,19 +46,21 @@ export default class Login extends Component {
           style={styles.textInput}
           autoCapitalize="none"
           placeholder="メールアドレス"
+          placeholderTextColor="black"
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
         <TextInput
           secureTextEntry
           style={styles.textInput}
+          placeholderTextColor="black"
           autoCapitalize="none"
           placeholder="パスワード"
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        <Button title="ログイン" onPress={this.handleLogin} />
         </View>
+        <Button title="ログイン" onPress={this.handleLogin} />
       </Container>
     )
   }
@@ -72,18 +74,18 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     paddingTop: 50,
-    fontFamily: 'HiraMinProN-W3',
   },
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 250
+    marginBottom: 170
   },
   textInput: {
     height: 40,
     width: '90%',
     borderColor: 'gray',
     borderWidth: 1,
-    marginTop: 50
+    marginTop: 50,
+    color: "black"
   },
 })

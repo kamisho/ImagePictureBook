@@ -117,7 +117,7 @@ export default class Top extends Component {
       <Container style={{backgroundColor: "#ffc0cb"}}>
         <Header>
           <Body>
-            <Title style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>Bijostagram</Title>
+            <Title style={{fontFamily: Platform.select({android: 'serif'})}}>Bijostagram</Title>
           </Body>
         </Header>
 
@@ -138,12 +138,12 @@ export default class Top extends Component {
 
         <View style={styles.selectBtn}>
           <Button transparent onPress={() => {this.pickImage() }}>
-            <Text style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を選ぶ</Text>
+            <Text style={{fontFamily: Platform.select({android: 'serif'})}}>美女を選ぶ</Text>
           </Button>
 
           {/* 投稿画面はデバックはActions.Posts() */}
           <Button transparent onPress={() => { this.addImage() }} >
-            <Text style={{fontFamily: Platform.select({ios:'HiraMinProN-W3', android: 'serif'})}}>美女を追加する</Text>
+            <Text style={{fontFamily: Platform.select({android: 'serif'})}}>美女を追加する</Text>
           </Button>
         </View>
       </Container>     

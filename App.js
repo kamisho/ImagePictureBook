@@ -14,7 +14,29 @@ import Settings from "./pages/Settings";
 import Tutorial from './pages/Tutorial';
 
 export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isReady: false
+    }
+  }
+  // You started loading 'Roboto_medium', but used it before it finished loading対策
+  componentWillMount() {
+    this.loadFonts();
+  }
+  async loadFonts() {
+    await Expo.Font.loadAsync({
+      Roboto: require("./node_modules/native-base/Fonts/Roboto.ttf"),
+      Roboto_medium: require("./node_modules/native-base/Fonts/Roboto_medium.ttf"),
+    });
+    this.setState({ isReady: true });
+  }
+
   render() {
+    if (!this.state.isReady) {
+      return <Expo.AppLoading />;
+    }
+
     return (
       <Router>
         {/* keyがシーンの識別子になる(別ページでAction.識別子 となる) */}

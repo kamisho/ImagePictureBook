@@ -85,6 +85,7 @@ export default class SignInForm extends Component {
           <TextInput
             style={styles.textInput}
             placeholder="Email"
+            placeholderTextColor="black"
             autoCapitalize="none"
             style={styles.textInput}
             onChangeText={email => this.setState({ email })}
@@ -94,6 +95,7 @@ export default class SignInForm extends Component {
             style={styles.textInput}
             secureTextEntry
             placeholder="Password"
+            placeholderTextColor="black"
             autoCapitalize="none"
             style={styles.textInput}
             onChangeText={password => this.setState({ password })}
@@ -117,11 +119,11 @@ export default class SignInForm extends Component {
             animationType={"fade"}
             placeHolderText="生年月日"
             textStyle={{ color: "green"}}
-            placeHolderTextStyle={{ color: "black" }}
+            placeholderTextColor="black"
             onDateChange={value => this.setState({ birthDay: value })}
           />
-          <Button title="登録" onPress={this.handleSignUp} />
         </View>
+        <Button title="登録" onPress={this.handleSignUp} />
       </Container>
     )
   }
@@ -135,7 +137,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     paddingTop: 50,
-    fontFamily: 'HiraMinProN-W3',
   },
   container: {
     flex:1,

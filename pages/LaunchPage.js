@@ -91,7 +91,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     backgroundColor: 'pink',
-    fontFamily: 'HiraMinProN-W3',
     width: '80%',
     textAlign: 'center',
     borderRadius: 50,

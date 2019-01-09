@@ -135,8 +135,12 @@ export default class Posts extends Component{
         const image = Buffer.from(response.data).toString('base64');
         Share.share({
           title: "#美女図鑑",
-          message: `Bijostagramから投稿\n\niOS : coming soon\n\nAndroid: https://play.google.com/store/apps/details?id=com.kamisho.Bijostagram`,
-          url: `data:${response.headers['content-type'].toLowerCase()};base64,${image}`,
+          message: `Bijostagramから投稿\n\n美女画像 : ${img}`,
+        },
+        {
+          dialogTitle: 'Share',
+          excludedActivityTypes: [],
+          tintColor: 'green'
         }
       );
     })
@@ -228,6 +232,5 @@ const styles = StyleSheet.create({
   shareBtnText: {
     color: "white",
     fontSize: 20,
-    fontFamily: 'HiraMinProN-W3',
   }
 });
