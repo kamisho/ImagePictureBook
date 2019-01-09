@@ -28,6 +28,9 @@ import {
 } from 'react-native-responsive-screen';
 import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
+import {
+  AdMobRewarded
+} from 'expo';
 
 export default class Top extends Component {
   constructor(props){
@@ -36,6 +39,10 @@ export default class Top extends Component {
       name: '',
       image: ''
     }
+  }
+
+  componentWillUnmount() {
+    AdMobRewarded.removeAllListeners();
   }
 
   onChangeText(e){
@@ -71,6 +78,15 @@ export default class Top extends Component {
   }
 
   addImage = () => {
+
+    AdMobRewarded.setTestDeviceID("EMULATOR");
+    // ALWAYS USE TEST ID for Admob ads
+    AdMobRewarded.setAdUnitID("ca-app-pub-8344544670768968/3309132385");
+    
+    AdMobRewarded.addEventListener("rewardedVideoDidLoad", () =>
+      console.log("interstitialDidLoad")
+    );
+
     if(!this.state.name || !this.state.image){
       Alert.alert(
         '美女の名は？',
