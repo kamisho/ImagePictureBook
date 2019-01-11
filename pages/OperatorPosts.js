@@ -31,8 +31,6 @@ import firebase from '../firebase';
 import FooterBtn from './FooterBtn';
 import {
   AdMobBanner,
-  AdMobInterstitial,
-  PublisherBanner,
 } from 'expo';
 import axios from 'axios';
 import { Buffer } from 'buffer/';
@@ -69,7 +67,7 @@ export default class Posts extends Component{
         
         // data()でドキュメントが取れる
         const document = doc.data();
-          if(uid === document.userId){
+          if(document.userId === "lwd1rWWSZca9qFeOKdP7uIB46pA3"){
             posts.push({
               name: document.bijoname,
               image: document.bijoimage,
@@ -160,7 +158,7 @@ export default class Posts extends Component{
 
     return(
       <Container>
-        <Text style={styles.explanationApp}>あなたの美女図鑑</Text>
+        <Text style={styles.explanationApp}>あなたへの美女図鑑</Text>
         <ScrollView style={{ marginTop: 5 }}>
           <View style={styles.container}>
             <Modal style={styles.modal} animationType={'fade'}

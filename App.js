@@ -12,6 +12,7 @@ import SignInForm from './pages/SignInForm';
 import EditProfile from './pages/EditProfile';
 import Settings from "./pages/Settings";
 import Tutorial from './pages/Tutorial';
+import OperatorPosts from "./pages/OperatorPosts";
 
 export default class App extends Component {
   constructor(props){
@@ -50,6 +51,7 @@ export default class App extends Component {
           <Scene key="Settings" component={Settings} />
           <Scene key="EditProfile" component={EditProfile} hideNavBar={false} />
           <Scene key="Tutorial" component={Tutorial} hideNavBar={false} />
+          <Scene key="OperatorPosts" component={OperatorPosts} />
         </Scene>
       </Router>
     );

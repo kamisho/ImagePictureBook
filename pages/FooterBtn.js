@@ -13,6 +13,7 @@ import Top from './Top';
 import Posts from './Posts';
 import Settings from './Settings';
 import LaunchPage from './LaunchPage';
+import OperatorPosts from "./OperatorPosts";
 
 export default class FooterTabs extends Component {
   constructor(props){
@@ -36,6 +37,10 @@ export default class FooterTabs extends Component {
               <Posts />
             );
           }else if(this.state.viewPageNum == 2){
+            return(
+              <OperatorPosts />
+            );
+          }else if(this.state.viewPageNum == 3){
             return(
               <Settings />
             );
@@ -74,11 +79,22 @@ export default class FooterTabs extends Component {
               vertical
               active={this.state.viewPageNum == 2}
               onPress={() => this.setState({
-                viewPageNum: 2
+                viewPageNum: 2,
               })}
             >
-              <Icon active={this.state.viewPageNum == 2} name="settings" />
+              <Icon active={this.state.viewPageNum == 2} name='menu'/>
             </Button>
+
+            <Button
+              vertical
+              active={this.state.viewPageNum == 3}
+              onPress={() => this.setState({
+                viewPageNum: 3
+              })}
+            >
+              <Icon active={this.state.viewPageNum == 3} name="settings" />
+            </Button>
+            
           </FooterTab>
         </Footer>
       </Container>
