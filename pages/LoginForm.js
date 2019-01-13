@@ -12,6 +12,7 @@ import {
   Alert
 } from 'react-native'
 import firebase from '../firebase'
+import { moderateScale } from 'react-native-size-matters';
 
 export default class Login extends Component {
   constructor(props){
@@ -28,7 +29,10 @@ export default class Login extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => this.props.navigation.navigate('FooterBtn'))
+      .then(() => 
+        this.props.navigation.navigate('FooterBtn'),
+        Alert.alert("ようこそ、美女の世界へ")
+      )
       .catch(error => 
         Alert.alert("ログインに失敗しました")
       )
@@ -39,9 +43,7 @@ export default class Login extends Component {
       <Container style={styles.allScreen}>
         <Body>
           <Text style={styles.titleText}>美女国への入国審査</Text>
-        </Body>
-
-      <View style={styles.container}>
+      
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
@@ -59,8 +61,8 @@ export default class Login extends Component {
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        </View>
         <Button title="ログイン" onPress={this.handleLogin} />
+        </Body>
       </Container>
     )
   }
@@ -81,11 +83,11 @@ const styles = StyleSheet.create({
     marginBottom: 170
   },
   textInput: {
+    backgroundColor: "white",
     height: 40,
-    width: '90%',
+    width: moderateScale(300),
     borderColor: 'gray',
     borderWidth: 1,
-    marginTop: 50,
-    color: "black"
+    marginTop: 50
   },
 })

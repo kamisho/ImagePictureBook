@@ -158,6 +158,7 @@ export default class Posts extends Component{
 
     return(
       <Container>
+      <Header />
         <Text style={styles.explanationApp}>あなたへの美女図鑑</Text>
         <ScrollView style={{ marginTop: 5 }}>
           <View style={styles.container}>
@@ -195,11 +196,12 @@ export default class Posts extends Component{
 
 const styles = StyleSheet.create({
   explanationApp: {
-    marginTop: 20,
+    marginTop: 3,
     backgroundColor: "pink",
     fontSize: 25,
     color: "white",
-    height: 31,
+    height: 40,
+    paddingTop: 5,
     width: '100%',
     justifyContent: 'center',
     textAlign: "center",
@@ -236,6 +238,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     textAlign: "center",
+    marginBottom: 15
   },
   shareBtnText: {
     color: "white",

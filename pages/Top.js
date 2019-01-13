@@ -28,9 +28,8 @@ import {
 } from 'react-native-responsive-screen';
 import { Actions } from "react-native-router-flux";
 import firebase from '../firebase';
-import {
-  AdMobRewarded
-} from 'expo';
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+
 
 export default class Top extends Component {
   constructor(props){
@@ -41,9 +40,6 @@ export default class Top extends Component {
     }
   }
 
-  componentWillUnmount() {
-    AdMobRewarded.removeAllListeners();
-  }
 
   onChangeText(e){
     this.setState({
@@ -78,14 +74,6 @@ export default class Top extends Component {
   }
 
   addImage = () => {
-
-    AdMobRewarded.setTestDeviceID("EMULATOR");
-    // ALWAYS USE TEST ID for Admob ads
-    AdMobRewarded.setAdUnitID("ca-app-pub-8344544670768968/3309132385");
-    
-    AdMobRewarded.addEventListener("rewardedVideoDidLoad", () =>
-      console.log("interstitialDidLoad")
-    );
 
     if(!this.state.name || !this.state.image){
       Alert.alert(
@@ -133,7 +121,7 @@ export default class Top extends Component {
       <Container style={{backgroundColor: "#ffc0cb"}}>
         <Header>
           <Body>
-            <Title style={{fontFamily: Platform.select({android: 'serif'})}}>Bijostagram</Title>
+            <Title style={styles.appName}>美女図鑑</Title>
           </Body>
         </Header>
 
@@ -154,12 +142,12 @@ export default class Top extends Component {
 
         <View style={styles.selectBtn}>
           <Button transparent onPress={() => {this.pickImage() }}>
-            <Text style={{fontFamily: Platform.select({android: 'serif'})}}>美女を選ぶ</Text>
+            <Text style={styles.underBtn}>美女を選ぶ</Text>
           </Button>
 
           {/* 投稿画面はデバックはActions.Posts() */}
           <Button transparent onPress={() => { this.addImage() }} >
-            <Text style={{fontFamily: Platform.select({android: 'serif'})}}>美女を追加する</Text>
+            <Text style={styles.underBtn}>美女を追加する</Text>
           </Button>
         </View>
       </Container>     
@@ -168,26 +156,34 @@ export default class Top extends Component {
 }
 
 const styles = StyleSheet.create({
+  appName: {
+    fontFamily: Platform.select({android: 'serif'}), 
+    marginTop: scale(15),
+    alignItems: "center"
+  },
   inputName: {
     height: hp('5%'),
     width: wp('80%'),
-    marginTop: 30,
+    marginTop: scale(45),
     backgroundColor: 'white',
   },
   textName: {
     textAlign: 'center',
   },
   cardSize: {
-    marginTop: 30,
+    marginTop: "12%",
   },
   imageSize: {
-    height: hp('50%'),
+    height: hp('48%'),
     width: null, 
-    flex: 1
+    flex: 1,
   },
   selectBtn:{
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 15,
+    marginBottom: moderateScale(30)
+  },
+  underBtn: {
+    fontSize: moderateScale(22)
   }
 });

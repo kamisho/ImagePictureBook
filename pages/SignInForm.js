@@ -13,7 +13,8 @@ import {
   DatePicker
 } from 'native-base';
 import firebase from '../firebase'
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import RadioForm from 'react-native-simple-radio-button';
+import { moderateScale } from 'react-native-size-matters';
 
 export default class SignInForm extends Component {
   constructor(props){
@@ -79,15 +80,11 @@ export default class SignInForm extends Component {
       <Container style={styles.allScreen}>
         <Body>
           <Text style={styles.titleText}>新規会員登録</Text>
-        </Body>
-
-        <View style={styles.container}>
           <TextInput
             style={styles.textInput}
             placeholder="Email"
             placeholderTextColor="black"
             autoCapitalize="none"
-            style={styles.textInput}
             onChangeText={email => this.setState({ email })}
             value={this.state.email}
           />
@@ -97,33 +94,36 @@ export default class SignInForm extends Component {
             placeholder="Password"
             placeholderTextColor="black"
             autoCapitalize="none"
-            style={styles.textInput}
             onChangeText={password => this.setState({ password })}
             value={this.state.password}
           />
+        
+      
+          <Body>
+            <RadioForm
+              style={styles.selectGender}
+              initial={0}
+              radio_props={genders}
+              onPress={(value) => this.setState({ gender: value })}
+              formHorizontal={true}
+              buttonColor={'#50C900'}
+            />
 
-          <RadioForm
-            style={styles.selectGender}
-            initial={0}
-            radio_props={genders}
-            onPress={(value) => this.setState({ gender: value })}
-            formHorizontal={true}
-          />
-          
-          <DatePicker
-            defaultDate={new Date(2018,4, 4)}
-            minimumDate={new Date(1901, 1, 1)}
-            maximumDate={new Date(2018, 12, 31)}
-            locale={"ja"}
-            modalTransparent={false}
-            animationType={"fade"}
-            placeHolderText="生年月日"
-            textStyle={{ color: "green"}}
-            placeholderTextColor="black"
-            onDateChange={value => this.setState({ birthDay: value })}
-          />
-        </View>
-        <Button title="登録" onPress={this.handleSignUp} />
+            <DatePicker
+              defaultDate={new Date(2000,4, 1)}
+              minimumDate={new Date(1900, 1, 1)}
+              maximumDate={new Date(2018, 12, 31)}
+              locale={"ja"}
+              modalTransparent={false}
+              animationType={"fade"}
+              placeHolderText="生年月日"
+              textStyle={{ color: "green"}}
+              placeholderTextColor="black"
+              onDateChange={value => this.setState({ birthDay: value })}
+            />
+            <Button title="登録" onPress={this.handleSignUp} />
+          </Body>
+        </Body>
       </Container>
     )
   }
@@ -131,28 +131,20 @@ export default class SignInForm extends Component {
 
 const styles = StyleSheet.create({
   allScreen: {
-    backgroundColor: "pink"
+    backgroundColor: "pink",
   },
   titleText: {
     color: "white",
     fontSize: 30,
     paddingTop: 50,
   },
-  container: {
-    flex:1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 170
-  },
   textInput: {
+    backgroundColor: "white",
     height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 30
+    width: moderateScale(300),
+    marginTop: 20
   },
   selectGender: {
-    paddingTop:15,
-    justifyContent: "space-around"
+    paddingTop: moderateScale(20),
   }
 })

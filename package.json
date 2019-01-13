@@ -16,9 +16,11 @@
     "native-base": "^2.8.1",
     "react": "16.3.1",
     "react-native": "~0.55.2",
+    "react-native-responsive-fontsize": "^0.1.7",
     "react-native-responsive-screen": "^1.1.9",
     "react-native-router-flux": "^4.0.5",
-    "react-native-simple-radio-button": "^2.7.3"
+    "react-native-simple-radio-button": "^2.7.3",
+    "react-native-size-matters": "^0.1.6"
   },
   "devDependencies": {
     "schedule": "^0.4.0"
