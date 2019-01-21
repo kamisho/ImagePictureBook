@@ -40,6 +40,9 @@ export default class Top extends Component {
     }
   }
 
+  componentDidMount = () => {
+    Alert.alert("Welcom 美女図鑑")
+  }
 
   onChangeText(e){
     this.setState({
@@ -77,8 +80,8 @@ export default class Top extends Component {
 
     if(!this.state.name || !this.state.image){
       Alert.alert(
-        '美女の名は？',
-        '美女だけを追加してください。',
+        'What"s woman"s name？',
+        'Please add picture',
       );
     }else{ 
       const random = Math.random();
@@ -89,7 +92,7 @@ export default class Top extends Component {
         .catch(() => {
           console.log("failed")
         })
-      Alert.alert("美女を追加しました")
+      Alert.alert("You add!")
     }
   }
 
@@ -128,7 +131,7 @@ export default class Top extends Component {
         <Content>
           <Body>
             <Item rounded style={styles.inputName}>
-              <Input placeholder="美女名を入力" style={styles.textName} value={this.state.name} onChangeText={(text) => this.setState({name: text})} />
+              <Input placeholder="Name" style={styles.textName} value={this.state.name} onChangeText={(text) => this.setState({name: text})} />
             </Item>
           </Body>
           
@@ -142,12 +145,12 @@ export default class Top extends Component {
 
         <View style={styles.selectBtn}>
           <Button transparent onPress={() => {this.pickImage() }}>
-            <Text style={styles.underBtn}>美女を選ぶ</Text>
+            <Text style={styles.underBtn}>Select picture</Text>
           </Button>
 
           {/* 投稿画面はデバックはActions.Posts() */}
           <Button transparent onPress={() => { this.addImage() }} >
-            <Text style={styles.underBtn}>美女を追加する</Text>
+            <Text style={styles.underBtn}>add picture</Text>
           </Button>
         </View>
       </Container>     

@@ -9,8 +9,8 @@ export default class Tutorial extends Component{
   render(){
     return(
       <View>
-        <Text>↓使い方 ※Youtubeに移動します</Text>
-        <Text style={{ color: "blue"}} onPress={() => Linking.openURL("https://www.youtube.com/watch?v=PYVFts0f7z4")}>Bijostagramの使い方</Text>
+        <Text>↓How to user ※oepn youtube</Text>
+        <Text style={{ color: "blue"}} onPress={() => Linking.openURL("https://www.youtube.com/watch?v=PYVFts0f7z4")}>How to use 美女図鑑</Text>
       </View>
     );
   }

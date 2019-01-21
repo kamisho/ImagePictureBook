@@ -31,10 +31,9 @@ export default class Login extends Component {
       .signInWithEmailAndPassword(email, password)
       .then(() => 
         this.props.navigation.navigate('FooterBtn'),
-        Alert.alert("ようこそ、美女の世界へ")
       )
       .catch(error => 
-        Alert.alert("ログインに失敗しました")
+        Alert.alert("Failed login")
       )
   }
 
@@ -42,12 +41,12 @@ export default class Login extends Component {
     return (
       <Container style={styles.allScreen}>
         <Body>
-          <Text style={styles.titleText}>美女国への入国審査</Text>
+          <Text style={styles.titleText}>Login Form</Text>
       
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
-          placeholder="メールアドレス"
+          placeholder="email"
           placeholderTextColor="black"
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
@@ -57,11 +56,11 @@ export default class Login extends Component {
           style={styles.textInput}
           placeholderTextColor="black"
           autoCapitalize="none"
-          placeholder="パスワード"
+          placeholder="password"
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        <Button title="ログイン" onPress={this.handleLogin} />
+        <Button title="Login" onPress={this.handleLogin} />
         </Body>
       </Container>
     )

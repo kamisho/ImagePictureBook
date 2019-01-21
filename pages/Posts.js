@@ -161,7 +161,7 @@ export default class Posts extends Component{
     return(
       <Container>
         <Header />
-        <Text style={styles.explanationApp}>あなたの美女図鑑</Text>
+        <Text style={styles.explanationApp}>Yours</Text>
         <ScrollView style={{ marginTop: 5 }}>
           <View style={styles.container}>
             <Modal style={styles.modal} animationType={'fade'}

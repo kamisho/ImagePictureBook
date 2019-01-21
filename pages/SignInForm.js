@@ -43,11 +43,11 @@ export default class SignInForm extends Component {
 
   handleSignUp = () => {
     if(this.state.birthDay == "" || this.state.email == "" || this.state.email == ""){
-      Alert.alert("すべての項目を入力してください");
+      Alert.alert("Please fill in all");
     }else if(this.state.password.length < 6){
-      Alert.alert("パスワードは6文字以上必要です");
+      Alert.alert("Please enter using more 7 letters");
     }else if(!this.mailFormatCheck(this.state.email)){ 
-      Alert.alert("正しいメールアドレスの形式を入力してください")
+      Alert.alert("Please enter correct email form")
     // メアドがすでに登録されていた場合ってコードが欲しい
     }else{
       const { email, password } = this.state
@@ -66,20 +66,20 @@ export default class SignInForm extends Component {
           }
         this.props.navigation.navigate('FooterBtn')
       })
-      Alert.alert("ようこそ、美女の世界へ")
+      Alert.alert("Welcom")
     }
   }
 
   render() {
     const genders = [
-      {label: "男性", value: 0},
-      {label: "女性", value: 1}
+      {label: "Man", value: 0},
+      {label: "Woman", value: 1}
     ];
 
     return (
       <Container style={styles.allScreen}>
         <Body>
-          <Text style={styles.titleText}>新規会員登録</Text>
+          <Text style={styles.titleText}>Sign up</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Email"
@@ -116,12 +116,12 @@ export default class SignInForm extends Component {
               locale={"ja"}
               modalTransparent={false}
               animationType={"fade"}
-              placeHolderText="生年月日"
+              placeHolderText="Birthday"
               textStyle={{ color: "green"}}
               placeholderTextColor="black"
               onDateChange={value => this.setState({ birthDay: value })}
             />
-            <Button title="登録" onPress={this.handleSignUp} />
+            <Button title="Register" onPress={this.handleSignUp} />
           </Body>
         </Body>
       </Container>

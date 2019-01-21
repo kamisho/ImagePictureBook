@@ -40,7 +40,7 @@ export default class Settings extends Component{
   logout = () => {
     firebase.auth().signOut()
     .then(() => {
-      Alert.alert("ログアウトしました")
+      Alert.alert("Logout")
       Actions.LaunchPage();
     })
     .catch((error) => {
@@ -56,19 +56,19 @@ export default class Settings extends Component{
           <List>
             <ListItem>
             <Button onPress={() => Actions.EditProfile()} style={styles.accountEdit}>
-                <Text style={styles.accountLetter}>プロフィール</Text>
+                <Text style={styles.accountLetter}>Profile</Text>
               </Button>
             </ListItem>
 
             <ListItem>
             <Button onPress={() => Actions.Tutorial()} style={styles.accountEdit}>
-                <Text style={styles.accountLetter}>チュートリアル</Text>
+                <Text style={styles.accountLetter}>Tutorial</Text>
               </Button>
             </ListItem>
 
             <ListItem>
               <Button onPress={() => this.logout()} style={styles.accountEdit}>
-                <Text style={styles.accountLetter}>ログアウト</Text>
+                <Text style={styles.accountLetter}>Logout</Text>
               </Button>
             </ListItem>
           </List>

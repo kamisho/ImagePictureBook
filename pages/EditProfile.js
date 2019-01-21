@@ -49,9 +49,9 @@ export default class EditProfile extends Component{
     return(
       <View>
         <Text style={{ marginTop: 20 }}>{this.state.name}</Text>
-        <Text>{"メールアドレス: " + this.state.email}</Text>
-        <Text>{"性別 : " + this.state.gender}</Text>
-        <Text>{"生年月日 : " + this.state.birthday}</Text>
+        <Text>{"Mail: " + this.state.email}</Text>
+        <Text>{"Gender : " + this.state.gender}</Text>
+        <Text>{"Birthday : " + this.state.birthday}</Text>
       </View>
     );
   }

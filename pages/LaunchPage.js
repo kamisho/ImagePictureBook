@@ -45,11 +45,11 @@ export default class LaunchPage extends Component{
         <ImageBackground source={require("../pictures/bijodrink.jpg")} style={styles.backgroundImage}>
           <Body style={styles.container}>
             <Button style={styles.loginDesign} onPress={Actions.LoginForm} >
-              <Text style={styles.explainApp}>いざ、美女の世界へ</Text>
+              <Text style={styles.explainApp}>Login</Text>
             </Button>
 
             <Button style={styles.loginDesign} onPress={Actions.SignInForm} >
-              <Text style={styles.explainApp}>はじめての方はこちら</Text>
+              <Text style={styles.explainApp}>Sign up</Text>
             </Button>
           </Body>
         </ImageBackground>
