@@ -40,10 +40,6 @@ export default class Top extends Component {
     }
   }
 
-  componentDidMount = () => {
-    Alert.alert("Welcom 美女図鑑")
-  }
-
   onChangeText(e){
     this.setState({
       name: this.state.name
@@ -145,12 +141,12 @@ export default class Top extends Component {
 
         <View style={styles.selectBtn}>
           <Button transparent onPress={() => {this.pickImage() }}>
-            <Text style={styles.underBtn}>Select picture</Text>
+            <Text style={styles.underBtn}>Select</Text>
           </Button>
 
           {/* 投稿画面はデバックはActions.Posts() */}
           <Button transparent onPress={() => { this.addImage() }} >
-            <Text style={styles.underBtn}>add picture</Text>
+            <Text style={styles.underBtn}>Add</Text>
           </Button>
         </View>
       </Container>     

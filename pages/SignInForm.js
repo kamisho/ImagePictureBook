@@ -66,7 +66,7 @@ export default class SignInForm extends Component {
           }
         this.props.navigation.navigate('FooterBtn')
       })
-      Alert.alert("Welcom")
+      Alert.alert("Welcom to 美女図鑑")
     }
   }
 

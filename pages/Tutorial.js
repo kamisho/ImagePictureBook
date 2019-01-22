@@ -10,7 +10,7 @@ export default class Tutorial extends Component{
     return(
       <View>
         <Text>↓How to user ※oepn youtube</Text>
-        <Text style={{ color: "blue"}} onPress={() => Linking.openURL("https://www.youtube.com/watch?v=PYVFts0f7z4")}>How to use 美女図鑑</Text>
+        <Text style={{ color: "blue"}} onPress={() => Linking.openURL("https://youtu.be/xWr2QH7DTHQ")}>How to use 美女図鑑</Text>
       </View>
     );
   }

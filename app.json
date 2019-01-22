@@ -25,7 +25,7 @@
       "bundleIdentifier": "com.bijozukan-kamisho"
     },
     "android": {
-      "versionCode": 7,
+      "versionCode": 9,
       "package": "com.kamisho.Bijostagram"
     }
   }
