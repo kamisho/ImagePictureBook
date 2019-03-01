@@ -141,7 +141,7 @@ export default class Top extends Component {
 
         <View style={styles.selectBtn}>
           <Button transparent onPress={() => {this.pickImage() }}>
-            <Text style={styles.underBtn}>Select</Text>
+            <Text style={styles.underBtn}>選択</Text>
           </Button>
 
           {/* 投稿画面はデバックはActions.Posts() */}

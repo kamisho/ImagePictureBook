@@ -8,7 +8,7 @@ import {
   Modal, 
   ScrollView,
   Alert,
-  Share
+  Share,
 } from 'react-native';
 import ImageElement from './ImageElement';
 import { 
@@ -48,6 +48,7 @@ export default class Posts extends Component{
       name: '',
       image: '',
       items: [],
+      searchName: ""
     };
   }
 
@@ -144,6 +145,43 @@ export default class Posts extends Component{
       );
     })
   }
+
+  // 検索機能
+  searchName = () => {
+    const user = firebase.auth().currentUser;
+    const uid = user.uid;
+    const searchName = this.state.searchName;
+
+    // Initialize cloud firestore through Firebase
+    const db = firebase.firestore();
+
+    // postsコレクションからデータを取得
+    db.collection("posts").orderBy("timestamp", "desc").get().then((querySnapshot) => {
+      
+      const posts = [];
+
+      // forEachでドキュメントの配列が取れる
+      querySnapshot.forEach((doc) => {
+        
+        // data()でドキュメントが取れる
+        const document = doc.data();
+          if(uid === document.userId ){
+            if(document.bijoname.includes(searchName)){
+              posts.push({
+                name: document.bijoname,
+                image: document.bijoimage,
+                user: document.userId
+              });
+            }
+          }
+
+          this.setState({
+            items: posts,
+            user: document.userId
+          });
+        })
+      })
+  }
   
   render(){
 
@@ -161,7 +199,18 @@ export default class Posts extends Component{
     return(
       <Container>
         <Header />
-        <Text style={styles.explanationApp}>Yours</Text>
+        <Text style={styles.explanationApp}>あなたの美女図鑑</Text>
+        {/* 検索フィールド */}
+        <Item>
+          <Icon name="ios-search" />
+          <Input placeholder="美女名" onChangeText={(text) => {this.setState({ searchName: text })}} />
+          {/* <Icon name="ios-people" /> */}
+        </Item>
+        <Button transparent onPress={() => this.searchName()}>
+          <Text>検索</Text>
+        </Button>
+
+
         <ScrollView style={{ marginTop: 5 }}>
           <View style={styles.container}>
             <Modal style={styles.modal} animationType={'fade'}
